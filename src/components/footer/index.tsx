@@ -1,26 +1,17 @@
-import { FC, useState, useEffect } from "react"
+import React, { FC, useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import routes from "../../data/routes.json"
-import { getLocaleStorage, setLocaleStorage } from "../../helpers/utils"
 import clsx from "clsx"
 
-interface Props {}
-
-const Footer: FC<Props> = ({}) => {
-    const [activePage, setActivePage] = useState<string>(
-        getLocaleStorage("page") == null ? "home" : String(getLocaleStorage("page")),
-    )
-
-    const handleActivePage = (name: string) => {
-        setLocaleStorage("page", name)
-        setActivePage(name)
-        window.scrollTo({ top: 0, behavior: "smooth" })
-    }
+const Footer: FC = () => {
+    const activePageFromLocalStorage = localStorage.getItem("page")
+    const [activePage, setActivePage] = useState<string>(activePageFromLocalStorage || "home")
 
     useEffect(() => {
-        routes.forEach((route) => {
-            if (route.path === window.location.pathname) setActivePage(route.name)
-        })
+        const currentPage = routes.find((route) => route.path === window.location.pathname)
+        if (currentPage) {
+            setActivePage(currentPage.name)
+        }
     }, [])
 
     return (
@@ -32,15 +23,12 @@ const Footer: FC<Props> = ({}) => {
                         <ul className="footer-menu__list">
                             {routes.map((route) => (
                                 <li key={route.id} className="footer-menu__item">
-                                    <Link
-                                        to={route.path}
-                                        className={clsx(
-                                            "footer-menu__link",
-                                            activePage === route.name && "_active",
-                                        )}
-                                        onClick={() => handleActivePage(route.name)}>
+                                    <FooterLink
+                                        path={route.path}
+                                        active={activePage === route.name}
+                                        onClick={() => setActivePage(route.name)}>
                                         {route.component}
-                                    </Link>
+                                    </FooterLink>
                                 </li>
                             ))}
                         </ul>
@@ -50,5 +38,18 @@ const Footer: FC<Props> = ({}) => {
         </footer>
     )
 }
+
+interface FooterLinkProps {
+    path: string
+    active: boolean
+    onClick: () => void
+    children: React.ReactNode
+}
+
+const FooterLink: FC<FooterLinkProps> = ({ path, active, onClick, children }) => (
+    <Link to={path} className={clsx("footer-menu__link", active && "_active")} onClick={onClick}>
+        {children}
+    </Link>
+)
 
 export default Footer

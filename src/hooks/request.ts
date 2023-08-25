@@ -1,46 +1,69 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
+import { useEffect, useState } from "react";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
-export function useRequest(options = {}) {
-    const [response, setResponse] = useState<any>({});
+interface RequestOptions extends AxiosRequestConfig {
+    handleSuccess?: (data: any) => void;
+    handleError?: (error: any) => void;
+}
+
+interface RequestResponse<T> {
+    response?: T;
+    error?: any;
+    success: boolean;
+}
+
+export function useRequest<T = any>() {
+    const [response, setResponse] = useState<T | undefined>();
     const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<any | undefined>();
 
-    async function request(overrideOptions = {}, sync = false) {
+    const request = async (options: RequestOptions, sync = false): Promise<RequestResponse<T>> => {
         setLoading(true);
-        try {
-            const { data } = await axios({
-                ...options,
-                ...overrideOptions,
-            });
-            if (!sync) setResponse(data);
-            if (data.statusText === 'OK') {
-                return { response: data, success: true };
-            } else {
-                return { error: data, success: false };
-            }
-        } catch (e) {
-            console.log(e)
+        setError(undefined);
 
-            return { success: false };
+        try {
+            const { data }: AxiosResponse<T> = await axios(options);
+
+            if (!sync) {
+                setResponse(data);
+
+                if (options.handleSuccess) {
+                    options.handleSuccess(data);
+                }
+            }
+
+            return { response: data, success: true };
+        } catch (e) {
+            console.error(e);
+            setError(e);
+
+            if (options.handleError) {
+                options.handleError(e);
+            }
+
+            return { error: e, success: false };
         } finally {
-            if (!sync) setLoading(false);
+            if (!sync) {
+                setLoading(false);
+            }
         }
-    }
+    };
 
     return {
         loading,
         request,
         response,
+        error,
         setResponse,
-        setLoading,
     };
 }
 
-export function useLoad(options = {}, dependencies = []) {
-    const request = useRequest({ method: 'GET', ...options });
+export function useLoad<T = any>(options: RequestOptions, dependencies: any[] = [], sync = false) {
+    const { request, ...rest } = useRequest<T>();
+
     useEffect(() => {
-        request.request();
+        request(options, sync);
     }, dependencies);
 
-    return request;
+    return rest;
 }

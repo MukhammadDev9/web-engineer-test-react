@@ -1,45 +1,25 @@
-import { FC, useState, useEffect } from "react"
+import React, { FC, useState, useEffect, useCallback } from "react"
 import { Link } from "react-router-dom"
 import clsx from "clsx"
 import routes from "../../data/routes.json"
-import { getLocaleStorage, setLocaleStorage } from "../../helpers/utils"
 
-interface Props {}
-
-const Navbar: FC<Props> = ({}) => {
-    const [activePage, setActivePage] = useState<string>(
-        getLocaleStorage("page") == null ? "home" : String(getLocaleStorage("page")),
-    )
+const Navbar: FC = () => {
+    const [activePage, setActivePage] = useState<string>(localStorage.getItem("page") || "home")
     const [openMenu, setOpenMenu] = useState<boolean>(false)
     const [activeNavbar, setActiveNavbar] = useState<boolean>(false)
 
-    const handleActivePage = (name: string) => {
-        setLocaleStorage("page", name)
+    const handleActivePage = useCallback((name: string) => {
+        localStorage.setItem("page", name)
         setActivePage(name)
-        handleOpenMenu()
-        window.scrollTo({ top: 0, behavior: "smooth" })
-    }
+    }, [])
 
-    const handleOpenMenu = () => {
-        setOpenMenu(!openMenu)
-        if (openMenu) {
-            window.document.body.removeAttribute("style")
-        } else {
-            window.document.body.style.overflow = "hidden"
-            window.document.body.style.height = "100vh"
-        }
-    }
-
-    useEffect(() => {
-        routes.forEach((route) => {
-            if (route.path === window.location.pathname) setActivePage(route.name)
-        })
+    const handleOpenMenu = useCallback(() => {
+        setOpenMenu((prevState) => !prevState)
     }, [])
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 0) setActiveNavbar(true)
-            else setActiveNavbar(false)
+            setActiveNavbar(window.scrollY > 0)
         }
 
         window.addEventListener("scroll", handleScroll)
@@ -48,6 +28,28 @@ const Navbar: FC<Props> = ({}) => {
             window.removeEventListener("scroll", handleScroll)
         }
     }, [])
+
+    useEffect(() => {
+        const currentPage = routes.find((route) => route.path === window.location.pathname)
+        if (currentPage) {
+            setActivePage(currentPage.name)
+        }
+    }, [])
+
+    const handlePageClick = (name: string) => {
+        handleActivePage(name)
+        handleOpenMenu()
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    const bodyStyle = document.body.style
+    if (!openMenu) {
+        bodyStyle.removeProperty("overflow")
+        bodyStyle.removeProperty("height")
+    } else {
+        bodyStyle.overflow = "hidden"
+        bodyStyle.height = "100vh"
+    }
 
     return (
         <nav className="navbar">
@@ -76,7 +78,7 @@ const Navbar: FC<Props> = ({}) => {
                                                         "menu__link",
                                                         activePage === route.name && "_active",
                                                     )}
-                                                    onClick={() => handleActivePage(route.name)}>
+                                                    onClick={() => handlePageClick(route.name)}>
                                                     {route.component}
                                                 </Link>
                                             </li>

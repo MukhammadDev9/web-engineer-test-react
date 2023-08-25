@@ -3,15 +3,13 @@ import { Routes, Route, Navigate } from "react-router-dom"
 import routes from "../data/routes.json"
 import { Contact, Content, Home } from "../pages"
 
-interface Props {}
-
 type TRoutes = {
     Home: React.ReactNode
     Content: React.ReactNode
     Contact: React.ReactNode
 }
 
-const AppRouter: FC<Props> = ({}) => {
+const AppRouter: FC = () => {
     const RouteList: TRoutes = {
         Home: <Home />,
         Content: <Content />,

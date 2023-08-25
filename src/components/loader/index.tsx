@@ -1,8 +1,6 @@
 import { FC } from "react"
 
-interface Props {}
-
-const Loader: FC<Props> = ({}) => {
+const Loader: FC = () => {
     return (
         <div className="loader">
             <div className="loader__spin">Loading...</div>

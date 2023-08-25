@@ -3,9 +3,7 @@ import { useLoad } from "../../hooks/request"
 import { THomeMetaResponse } from "./types"
 import { Loader } from "../../components"
 
-interface Props {}
-
-const Home: FC<Props> = ({}) => {
+const Home: FC = () => {
     const getRequest = useLoad({ url: "home.json" })
     const { response, loading }: THomeMetaResponse = getRequest
 
@@ -17,11 +15,11 @@ const Home: FC<Props> = ({}) => {
         <section className="home-page fade-in">
             <div className="container">
                 <div className="home-page__container">
-                    <h1 className="home-page--title page-">{response.meta?.title}</h1>
-                    <p className="home-page--description">{response.meta?.description}</p>
+                    <h1 className="home-page--title page-">{response?.meta?.title}</h1>
+                    <p className="home-page--description">{response?.meta?.description}</p>
                     <div className="topic">
                         <ul className="topic__list">
-                            {response.meta?.topics.map((topic) => (
+                            {response?.meta?.topics.map((topic) => (
                                 <li className="topic__item">
                                     <h2 className="topic__title">{topic.topic_title}</h2>
                                     <div className="quote">
