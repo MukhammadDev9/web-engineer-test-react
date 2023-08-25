@@ -2,16 +2,19 @@
     {
         "id": 1,
         "path": "/",
+        "name": "home",
         "component": "Home"
     },
     {
         "id": 2,
         "path": "/content",
+        "name": "content",
         "component": "Content"
     },
     {
         "id": 3,
         "path": "/contact",
+        "name": "contact",
         "component": "Contact"
     }
 ]

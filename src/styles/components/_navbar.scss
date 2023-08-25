@@ -1,0 +1,149 @@
+.navbar {
+    position: absolute;
+    width: 100%;
+
+    &__wrapper {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 50;
+        background-color: $navbar-background-color;
+        color: $navbar-text-color;
+        @include transition(0.5, ease-in-out);
+
+        &._active {
+            background-color: $navbar-active-background-color;
+            color: $navbar-active-text-color;
+            padding-block: $navbar-active-padding-block + px;
+
+            .menu__icon span {
+                background-color: $navbar-active-text-color;
+            }
+            .navbar__body {
+                min-height: $navbar-active-initial-width + px;
+            }
+        }
+
+        &._active-menu {
+        }
+
+        .navbar__body {
+            min-height: $navbar-initial-width + px;
+        }
+    }
+
+    &__body {
+        @include flex(center, space-between);
+        padding-block: 5px;
+    }
+
+    &__logo {
+        &--link {
+            font-size: 22px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            z-index: 5;
+        }
+    }
+
+    &__menu {
+    }
+}
+
+.menu {
+    &__body {
+        position: fixed;
+        width: 100%;
+        min-height: 100vh;
+        overflow: auto;
+        top: -100%;
+        left: 0;
+        right: 0;
+        background-color: $white-10;
+        @include transition(0.5, ease, top);
+        @include flex(flex-end, flex-start, column);
+
+        &._active {
+            top: $navbar-initial-width + 1 + px;
+            border-top: 1px solid $black-10;
+        }
+    }
+
+    &__list {
+        padding-top: 2rem;
+        width: 100%;
+        height: 100%;
+        @include flex(flex-end, flex-start, column);
+    }
+
+    &__item {
+    }
+
+    &__link {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 250%;
+        text-transform: uppercase;
+        color: $grey-10;
+        @include transition();
+        z-index: 1;
+
+        &._active {
+            color: $black-10;
+            font-weight: 800;
+            font-size: 19px;
+        }
+    }
+
+    &__icon {
+        background: transparent;
+        border: none;
+        position: relative;
+        width: 30px;
+        height: 25px;
+        cursor: pointer;
+        z-index: 5;
+        span {
+            @include transition();
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            border-radius: 10rem;
+            background-color: $black-10;
+            &:first-child {
+                top: 0px;
+                left: 0;
+                bottom: auto;
+            }
+            &:nth-child(2) {
+                top: 50%;
+                right: 0;
+                transform: translateY(-50%);
+            }
+            &:last-child {
+                top: auto;
+                left: 0;
+                bottom: 0;
+            }
+        }
+        &._active {
+            span {
+                transform: scale(0);
+                &:first-child {
+                    width: 100%;
+                    transform: rotate(-45deg);
+                    top: 44%;
+                }
+                &:last-child {
+                    width: 100%;
+                    transform: rotate(45deg);
+                    bottom: 40%;
+                }
+            }
+        }
+    }
+}
