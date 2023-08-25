@@ -4,3 +4,42 @@
         font-weight: 400;
     }
 }
+
+.topic {
+    &__list {
+        @include adaptiveValue(margin-top, 50, 40);
+    }
+
+    &__item {
+        @include adaptiveValue(padding-bottom, 70, 45);
+    }
+
+    &__title {
+        font-size: 25px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+}
+
+.quote {
+    &__list {
+        @include adaptiveValue(margin-top, 45, 40);
+    }
+
+    &__item {
+        &:not(:last-child) {
+            @include adaptiveValue(margin-bottom, 38, 40);
+        }
+    }
+
+    &__title {
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    &__body {
+        font-size: 15px;
+        font-weight: 400;
+    }
+}

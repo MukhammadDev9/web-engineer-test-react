@@ -27,16 +27,17 @@
         }
 
         &._active-menu {
-        }
-
-        .navbar__body {
-            min-height: $navbar-initial-width + px;
+            .navbar__body {
+                min-height: $navbar-initial-width + px;
+            }
         }
     }
 
     &__body {
         @include flex(center, space-between);
         padding-block: 5px;
+        @include transition(0.4, ease-in-out, min-height);
+        @include adaptiveValue(min-height, $navbar-initial-width, $navbar-mobile-width);
     }
 
     &__logo {
@@ -48,9 +49,6 @@
             position: relative;
             z-index: 5;
         }
-    }
-
-    &__menu {
     }
 }
 
@@ -68,14 +66,14 @@
         @include flex(flex-end, flex-start, column);
 
         &._active {
-            top: $navbar-initial-width + 1 + px;
+            top: $navbar-initial-width + px;
             border-top: 1px solid $black-10;
             min-height: 100vh;
         }
     }
 
     &__list {
-        padding-top: 2rem;
+        padding-top: 30px;
         width: 100%;
         height: 100%;
         @include flex(flex-end, flex-start, column);

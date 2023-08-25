@@ -37,8 +37,7 @@ body {
 
 .wrapper {
     width: 100%;
-    // min-height: 100vh;
-    min-height: 200vh;
+    min-height: 100vh;
     overflow: hidden;
 }
 
@@ -54,7 +53,8 @@ body {
 }
 
 section {
-    margin-top: $navbar-initial-width + px;
+    @include adaptiveValue(margin-top, $navbar-initial-width, $navbar-mobile-width);
+    min-height: 100vh;
 }
 
 [class*="--title"] {
