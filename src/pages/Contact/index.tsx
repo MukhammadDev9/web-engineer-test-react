@@ -10,11 +10,15 @@ const Contact: FC<Props> = ({}) => {
 
     return (
         <section className="contact-page">
-            <div className="contact-page__container">
-                <h1 className="contact-page--title page-">{!loading && response.meta?.title}</h1>
-                <p className="contact-page--description">
-                    {!loading && response.meta?.description}
-                </p>
+            <div className="container">
+                <div className="contact-page__container">
+                    <h1 className="contact-page--title page-">
+                        {!loading && response.meta?.title}
+                    </h1>
+                    <p className="contact-page--description">
+                        {!loading && response.meta?.description}
+                    </p>
+                </div>
             </div>
         </section>
     )

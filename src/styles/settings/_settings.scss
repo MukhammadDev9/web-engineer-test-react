@@ -39,18 +39,25 @@ body {
     width: 100%;
     min-height: 100vh;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
     max-width: $container-max-width + px;
     margin-inline: auto;
+    height: 100%;
+}
+
+main {
+    flex: 1;
 }
 
 section {
     @include adaptiveValue(margin-top, $navbar-initial-width, $navbar-mobile-width);
+    height: 100%;
     min-height: calc(
-        #{$navbar-mobile-width} + ($navbar-initial-width - $navbar-mobile-width) + ((100vw - 320px) /
-                    #{$container-min-width - 320})
+        #{$navbar-mobile-width + px} + 50 * ((100vw - 320px) / #{$container-min-width - 320})
     );
 }
 

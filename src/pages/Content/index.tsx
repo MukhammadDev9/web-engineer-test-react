@@ -10,11 +10,15 @@ const Content: FC<Props> = ({}) => {
 
     return (
         <section className="content-page">
-            <div className="content-page__container">
-                <h1 className="content-page--title page-">{!loading && response.meta?.title}</h1>
-                <p className="content-page--description">
-                    {!loading && response.meta?.description}
-                </p>
+            <div className="container">
+                <div className="content-page__container">
+                    <h1 className="content-page--title page-">
+                        {!loading && response.meta?.title}
+                    </h1>
+                    <p className="content-page--description">
+                        {!loading && response.meta?.description}
+                    </p>
+                </div>
             </div>
         </section>
     )

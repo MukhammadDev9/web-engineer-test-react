@@ -1,0 +1,46 @@
+.footer {
+    &__title {
+        font-size: 22px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    &__body {
+        @media (min-width: 475px) {
+            padding-block: 35px;
+            @include flex(center, space-between);
+        }
+        @media (max-width: 475px) {
+            @include adaptiveValue(padding-top, 35, 39);
+            @include adaptiveValue(padding-bottom, 35, 24);
+            row-gap: 30px;
+            @include flex(flex-start, center, column);
+        }
+    }
+}
+
+.footer-menu {
+    &__list {
+        @media (min-width: 475px) {
+            column-gap: 2rem;
+            @include flex();
+        }
+        @media (max-width: 475px) {
+            line-height: 250%; /* 45px */
+            row-gap: 10px;
+            @include flex(flex-start, center, column);
+        }
+    }
+
+    &__link {
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: $secondary-color-theme;
+
+        &._active {
+            font-weight: 800;
+            color: $primary-color-theme;
+        }
+    }
+}
