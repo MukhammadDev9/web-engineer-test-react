@@ -16,7 +16,7 @@ const Navbar: FC<Props> = ({}) => {
     const handleActivePage = (name: string) => {
         setLocaleStorage("page", name)
         setActivePage(name)
-        setOpenMenu(false)
+        handleOpenMenu()
     }
 
     const handleOpenMenu = () => {

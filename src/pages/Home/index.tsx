@@ -12,7 +12,7 @@ const Home: FC<Props> = ({}) => {
         <section className="home-page">
             <div className="home-page__container">
                 <h1 className="home-page--title page-">{!loading && response.meta?.title}</h1>
-                <p className="home-page__description">{!loading && response.meta?.description}</p>
+                <p className="home-page--description">{!loading && response.meta?.description}</p>
                 <div className="topic">
                     <ul className="topic__list">
                         {!loading &&

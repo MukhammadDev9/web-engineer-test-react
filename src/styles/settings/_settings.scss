@@ -46,19 +46,27 @@ body {
     margin-inline: auto;
 }
 
+section {
+    @include adaptiveValue(margin-top, $navbar-initial-width, $navbar-mobile-width);
+    min-height: calc(
+        #{$navbar-mobile-width} + ($navbar-initial-width - $navbar-mobile-width) + ((100vw - 320px) /
+                    #{$container-min-width - 320})
+    );
+}
+
 [class*="__container"] {
     max-width: $container-min-width + px;
     margin-inline: auto;
     padding-inline: $container-padding-inline-width + px;
 }
 
-section {
-    @include adaptiveValue(margin-top, $navbar-initial-width, $navbar-mobile-width);
-    min-height: 100vh;
-}
-
 [class*="--title"] {
     @include adaptiveValue(font-size, 52, 42);
     font-weight: 700;
     text-transform: uppercase;
+}
+
+[class*="description"] {
+    font-size: 18px;
+    font-weight: 400;
 }
