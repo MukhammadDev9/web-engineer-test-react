@@ -1,6 +1,6 @@
 import { FC } from "react"
 import { useLoad } from "../../hooks/request"
-import { TContentMetaResponse } from "./types"
+import type { TContentMetaResponse } from "./types"
 
 interface Props {}
 
@@ -9,10 +9,12 @@ const Content: FC<Props> = ({}) => {
     const { response, loading }: TContentMetaResponse = getRequest
 
     return (
-        <section className="home-page">
-            <div className="home-page__container">
-                <h1 className="home-page--title page-">{!loading && response.meta?.title}</h1>
-                <p className="home-page--description">{!loading && response.meta?.description}</p>
+        <section className="content-page">
+            <div className="content-page__container">
+                <h1 className="content-page--title page-">{!loading && response.meta?.title}</h1>
+                <p className="content-page--description">
+                    {!loading && response.meta?.description}
+                </p>
             </div>
         </section>
     )
