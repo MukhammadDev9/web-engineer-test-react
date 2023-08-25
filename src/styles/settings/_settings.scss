@@ -1,0 +1,53 @@
+body {
+    font-size: $global-font-size + px;
+    font-weight: $global-font-weight;
+    font-family: $global-font-family;
+    line-height: $global-line-height;
+    background-color: $body-background-color;
+    color: $body-text-color;
+}
+
+/* Scrollbar width */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Scrollbar track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 2px $grey-10;
+}
+
+/* Scrollbar handle */
+::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 5px $white-10;
+    background-color: $primary-color-theme;
+    border-radius: 10px;
+}
+
+/* Scrollbar handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    box-shadow: inset 0 0 8px $white-10;
+}
+
+/* Handle selection */
+::selection {
+    background-color: $primary-color-theme;
+    color: $white-10;
+}
+
+.wrapper {
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    max-width: $container-max-width + px;
+    margin-inline: auto;
+}
+
+[class*="__container"] {
+    max-width: $container-min-width + px;
+    margin-inline: auto;
+    padding-inline: $container-padding-inline-width + px;
+}

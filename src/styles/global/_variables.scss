@@ -1,0 +1,23 @@
+// Global variables
+$global-font-size: 15;
+$global-font-family: "Roboto", sans-serif;
+$global-line-height: 1.5;
+$global-font-weight: 400;
+
+// Colors
+$black-10: #000000;
+$white-10: #ffffff;
+$grey-10: #8a8a8a;
+
+// Body variables
+$body-background-color: $white-10;
+$body-text-color: $black-10;
+
+// Main color theme
+$primary-color-theme: $black-10;
+$secondary-color-theme: $grey-10;
+
+// Container variables
+$container-max-width: 1440;
+$container-min-width: 1180;
+$container-padding-inline-width: 15;
