@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import routes from "../../data/routes.json"
 import { getLocaleStorage, setLocaleStorage } from "../../helpers/utils"
@@ -14,7 +14,14 @@ const Footer: FC<Props> = ({}) => {
     const handleActivePage = (name: string) => {
         setLocaleStorage("page", name)
         setActivePage(name)
+        window.scrollTo({ top: 0, behavior: "smooth" })
     }
+
+    useEffect(() => {
+        routes.forEach((route) => {
+            if (route.path === window.location.pathname) setActivePage(route.name)
+        })
+    }, [])
 
     return (
         <footer className="footer">

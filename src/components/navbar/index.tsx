@@ -17,6 +17,7 @@ const Navbar: FC<Props> = ({}) => {
         setLocaleStorage("page", name)
         setActivePage(name)
         handleOpenMenu()
+        window.scrollTo({ top: 0, behavior: "smooth" })
     }
 
     const handleOpenMenu = () => {
@@ -28,6 +29,12 @@ const Navbar: FC<Props> = ({}) => {
             window.document.body.style.height = "100vh"
         }
     }
+
+    useEffect(() => {
+        routes.forEach((route) => {
+            if (route.path === window.location.pathname) setActivePage(route.name)
+        })
+    }, [])
 
     useEffect(() => {
         const handleScroll = () => {
