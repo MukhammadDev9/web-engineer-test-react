@@ -61,6 +61,22 @@ section {
     );
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation-name: fadeIn;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+}
+
 [class*="__container"] {
     max-width: $container-min-width + px;
     margin-inline: auto;
