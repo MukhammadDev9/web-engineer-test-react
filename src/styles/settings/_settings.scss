@@ -56,3 +56,9 @@ body {
 section {
     margin-top: $navbar-initial-width + px;
 }
+
+[class*="--title"] {
+    @include adaptiveValue(font-size, 52, 42);
+    font-weight: 700;
+    text-transform: uppercase;
+}

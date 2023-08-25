@@ -58,18 +58,19 @@
     &__body {
         position: fixed;
         width: 100%;
-        min-height: 100vh;
+        min-height: 0;
         overflow: auto;
         top: -100%;
         left: 0;
         right: 0;
         background-color: $white-10;
-        @include transition(0.5, ease, top);
+        @include transition(0.6, ease-in-out, top);
         @include flex(flex-end, flex-start, column);
 
         &._active {
             top: $navbar-initial-width + 1 + px;
             border-top: 1px solid $black-10;
+            min-height: 100vh;
         }
     }
 

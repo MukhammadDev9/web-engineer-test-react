@@ -8,7 +8,13 @@ const Home: FC<Props> = ({}) => {
 
     return (
         <section className="home-page">
-            <div className="home-page__container">{loading ? "loading" : response.name}</div>
+            <div className="home-page__container">
+                <h1 className="home-page--title page-">{!loading && response?.meta?.title}</h1>
+                <p className="home-page__description">{!loading && response?.meta?.description}</p>
+                <div className="quotes">
+                    
+                </div>
+            </div>
         </section>
     )
 }

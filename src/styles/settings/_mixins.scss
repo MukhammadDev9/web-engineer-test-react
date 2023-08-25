@@ -14,9 +14,9 @@
 
     #{$property}: $startSize + px;
 
-    @media (max-width:#{$minWidthContainer + px}) {
+    @media (max-width:#{$container-min-width + px}) {
         #{$property}: calc(
-            #{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$minWidthContainer - 320})
+            #{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$container-min-width - 320})
         );
     }
 }
